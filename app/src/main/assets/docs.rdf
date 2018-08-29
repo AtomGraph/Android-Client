@@ -1,0 +1,1000 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:j.0="http://www.w3.org/ns/auth/acl#"
+    xmlns:j.1="https://www.w3.org/ns/ldt#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:j.2="http://atomgraph.com/ns/platform/templates#"
+    xmlns:j.3="https://www.w3.org/ns/ldt/core/domain#"
+    xmlns:j.4="http://rdfs.org/ns/void#"
+    xmlns:j.5="http://purl.org/dc/terms/"
+    xmlns:j.6="http://rdfs.org/sioc/ns#"
+    xmlns:j.7="http://www.w3.org/1999/xhtml/vocab#"
+    xmlns:j.8="https://linkeddatahub.com:4443/docs/ns/default#"
+    xmlns:j.9="http://spinrdf.org/spl#"
+    xmlns:j.10="http://xmlns.com/foaf/0.1/"
+    xmlns:j.11="https://www.w3.org/ns/ldt/document-hierarchy/domain#" > 
+  <rdf:Description rdf:about="https://linkeddatahub.com:4443/docs/usage/">
+    <j.6:has_parent rdf:resource="https://linkeddatahub.com:4443/docs/"/>
+    <j.5:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2018-08-19T08:57:59.012+02:00</j.5:created>
+    <j.5:title>Usage</j.5:title>
+    <j.0:owner rdf:resource="https://linkeddatahub.com:4443/admin/acl/agents/ce84eb31-cc1e-41f4-9e29-dacd417b9818#this"/>
+    <j.10:maker rdf:resource="https://linkeddatahub.com:4443/admin/acl/agents/ce84eb31-cc1e-41f4-9e29-dacd417b9818#this"/>
+    <j.5:description>How to perform basic data management actions</j.5:description>
+    <j.6:has_space rdf:resource="https://linkeddatahub.com:4443/docs/"/>
+    <j.11:slug>a2ddb787-c334-4907-a780-22e6885cb02e</j.11:slug>
+    <j.4:inDataset rdf:resource="https://linkeddatahub.com:4443/docs/graphs/45564940-d93c-48ff-9db7-433b985de8bd#this"/>
+    <rdf:type rdf:resource="https://linkeddatahub.com:4443/docs/ns/default#Container"/>
+    <j.6:content rdf:parseType="Literal"><div xmlns="http://www.w3.org/1999/xhtml">
+    <p class="lead">This guide explains the basic terms and data management actions.</p>
+    <div>
+        <h2 id="dataspace">Dataspace</h2>
+        <p>The user is always working within the <a href="../manage-apps#dataspaces">dataspace</a>. A dataspace consists of two
+            LDT applications:</p>
+        <ol>
+            <li>the end-user application</li>
+            <li>the administration application which only administration users have access to</li>
+        </ol>
+        <p>This guide provides the end-user perspective; see <a href="../administration/">Administration</a> guides for the
+            administrator perspective.</p>
+    </div>
+    <div>
+        <h2 id="hierarchy">Document hierarchy</h2>
+        <p>The basic structure of resources in an application is analogous to the file system, but built using RDF
+            resources and relationships between them instead. There is a hierarchy of <dfn>containers</dfn> (folders),
+            which are collections of <dfn>items</dfn> (files) as well as sub-containers (sub-folders). Both containers
+            and items are <dfn>documents</dfn>. Items cannot contain other documents.</p>
+        <p>The first level of resources in a container is referred to as its <dfn>children</dfn> (of which that container
+            is the <dfn>parent</dfn>, while all levels down the hierarchy are collectively referred to as
+            <dfn>descendants</dfn>.</p>
+        <p>When a user logs in, the application loads its root container (unless a specific URI was requested). From there,
+            users can navigate down the resource hierarchy, starting with children of the <dfn>root container</dfn>. At
+            any moment there is only one <dfn>current document</dfn> per page, on which <a href="#manage">actions</a> can
+            be performed: it can be viewed, edited etc.</p>
+        <p>LinkedDataHub also provides several <dfn>system containers</dfn> for built-in content types such as files, imports,
+          and SPARQL queries, as well as temporal and geospatial views over the application's dataset.</p>
+    </div>
+    <div>
+        <h2 id="manage">Manage documents</h2>
+        <div>
+            <h3 id="view">View</h3>
+            <p>
+                <object data="../uploads/d9ec2ef2b2f1268affa6deb3f3f971bdf6a56b64" type="video/webm"></object>
+            </p>
+            <p>This is the default action when a document is accessed. The content of the view is different depending on
+                whether the current document is a container or an item. The presentation layout also depends on the current
+                <a href="../user-interface#layout-modes">layout mode</a>.</p>
+            <p>Container view displays a list of its children. Containers usually do not retrieve the full list of their
+                children. Instead, they provide a paginated access over them, allowing a user to
+                <a href="../user-interface#pagination" title="Pagination">navigate between pages</a> that contain a "slice"
+                with a limited number of children.</p>
+            <p>Item view displays description of the current resource, listing its properties.</p>
+        </div>
+        <div>
+            <h3 id="create">Create</h3>
+            <p>
+                <object data="../uploads/490945931415b9ab201ed85f296a84c8a11134d1" type="video/webm"></object>
+            </p>
+            <p>Create action creates a new resource of the selected type using
+                <a href="../user-interface#create-mode" title="Create mode">create mode</a>. A newly created document becomes a
+                child of the current container, unless a different one is specified in the creation dialog.</p>
+            <p>Every document can contain (X)HTML content which is edited using an embedded WYSIWYG editor.</p>
+            <p>The resource type can be something else than a document, e.g. a physical thing such as person, or an
+                abstract concept. In that case, it is referred to as the <dfn>topic resource</dfn> which is paired with a
+                document, and they are created together. The relationships between documents and topic resources is
+                <a href="administration/model/#restrictions">managed in the model</a>.</p>
+            <p>A new document can only be created if it and its topic resource validate, i.e. if all property values from
+                user input satisfy URI syntax, mandatory values and other constraints. Constraints are also
+                <a href="administration/model/#constraints">managed in the model</a>.</p>
+        </div>
+        <div>
+            <h3 id="update">Update</h3>
+            <p>
+                <object data="../uploads/30d8cc764648ebd67497413b16a94fca56c8e1e4" type="video/webm"></object>
+            </p>
+            <p>LinkedDataHub stores the description of every document in a separate RDF graph. The distinction between
+                document and its graph is important to understand; it is the graph that is being edited using
+                <a href="../user-interface#edit-mode">edit mode</a> and updated as a result of this action.</p>
+            <p>Just like with document creation, a document can only be updated if it and its topic resource validate, i.e.
+                if all property values from user input satisfy URI syntax, mandatory values and other constraints.</p>
+            <p>In future versions, we plan to store multiple graphs with descriptions of the same document but with
+                different timestamps, enabling revision history.</p>
+        </div>
+        <div>
+            <h3 id="delete">Delete</h3>
+            <p>
+                <object data="../uploads/121916e2a51476351451c218b1a6dec9de2e7774" type="video/webm"></object>
+            </p>
+            <p>This action deletes the current document by deleting the graph with its description.</p>
+            <p>Deleting a container currently does not delete any of its descendants.</p>
+        </div>
+        <div>
+            <h3 id="download">Download</h3>
+            <p>
+                <object data="../uploads/9f9c3fc45ed41d6dad05762b501512b002f0efc5" type="video/webm"></object>
+            </p>
+            <p>Download action returns the description of the current document as RDF data in the selected format.</p>
+        </div>
+    </div>
+    <div>
+        <h2 id="search">Search</h2>
+        <p>
+            <object data="../uploads/1cf5edfd48c75a47462e00b6ef7857ee1429bfd3" type="video/webm"></object>
+        </p>
+        <p>Perform an application-wide search for resources (documents as well as their topics) using the
+            <a href="../user-interface#navigation-bar">search box</a>. Search uses regex to match search keywords
+            against resource labels, descriptions, and content, and returns the results as a container view.</p>
+        <p>The exact search criteria depend on the query which is configured for the search container in 
+        <a href="../administration/sitemap/">the sitemap</a>.</p>
+        <p>The search bar also works as address bar for Linked Data resources. Enter a URI and LinkedDataHub will attempt
+            to load RDF data from it by switching into Linked Data browser mode.</p>
+    </div>
+    <div>
+        <h2 id="files">Files</h2>
+        <p>Files can be uploaded by selecting the File type in the <a href="../user-interface#action-bar">action bar</a>.</p>
+        <p>System container with uploaded files can be found in the <a href="../user-interface#left-nav">left-side
+            navigation</a> bar.</p>
+    </div>
+</div></j.6:content>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://linkeddatahub.com:4443/docs/dataset-structure">
+    <j.5:title>Dataset structure</j.5:title>
+    <j.0:owner rdf:resource="https://linkeddatahub.com:4443/admin/acl/agents/ce84eb31-cc1e-41f4-9e29-dacd417b9818#this"/>
+    <j.5:description>Learn what RDF dataset structure is supported by LinkedDataHub</j.5:description>
+    <j.6:has_space rdf:resource="https://linkeddatahub.com:4443/docs/"/>
+    <j.4:inDataset rdf:resource="https://linkeddatahub.com:4443/docs/graphs/b63e4ba8-0a42-4c69-a6ee-875299981cd4#this"/>
+    <j.10:maker rdf:resource="https://linkeddatahub.com:4443/admin/acl/agents/ce84eb31-cc1e-41f4-9e29-dacd417b9818#this"/>
+    <j.6:content rdf:parseType="Literal"><div xmlns="http://www.w3.org/1999/xhtml">
+    <p class="lead">Here we describe the RDF dataset structures supported by LinkedDataHub.</p>
+    <p>URIs relative to the application base URI</p>
+    <div>
+        <h2 id="generic">Generic</h2>
+        <p>Any RDF dataset is supported in this mode. It can contain data in the default graph, named
+            graphs, or a combination of those. The write operations are supported using
+            SPARQL <a href="administration/sitemap/#commands">update commands</a>.</p>
+    </div>
+    <div>
+        <h2 id="linked-data-hub">LinkedDataHub</h2>
+        <p>Default LinkedDataHub dataset structure follows these conventions:</p>
+        <ol>
+            <li>the default graph is not used</li>
+            <li>each document is stored using 2 named graphs: the <dfn>content graph</dfn> with the
+                RDF properties and content that the user can update; and the <dfn>meta-graph</dfn> with
+              system metadata</li>
+            <li>an inverse functional relationship exists between the document and its content graph,
+                as well as the content graph and the meta graph. That allows to locate the graph
+                with the document description using the <code>void:inDataset</code> document property,
+                which can be managed using the <a href="http-api#graphs">Graph Store Protocol</a> in
+                order to change the description(s) of the document or its related resources.</li>
+        </ol>
+        <p>The LinkedDataHub dataset can be <a href="manage-apps">installed</a> into an application service
+            by the application's owners.</p>
+    </div>
+    <p>The distinction between dataset structures matters mostly for updates and versioning. It is much
+        more straight-forward to change graph contents using GSP than update resource description using
+        SPARQL.</p>
+</div></j.6:content>
+    <j.11:slug>bbbe7883-0b10-4b4d-9b2b-9ce9d2563492</j.11:slug>
+    <j.5:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2018-08-19T08:58:20.233+02:00</j.5:created>
+    <j.6:has_container rdf:resource="https://linkeddatahub.com:4443/docs/"/>
+    <rdf:type rdf:resource="https://linkeddatahub.com:4443/docs/ns/default#Item"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://linkeddatahub.com:4443/docs/user-interface">
+    <j.5:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2018-08-19T08:58:36.939+02:00</j.5:created>
+    <j.5:description>A walk through the main features of application user interface</j.5:description>
+    <j.5:title>User interface</j.5:title>
+    <j.6:has_container rdf:resource="https://linkeddatahub.com:4443/docs/"/>
+    <j.0:owner rdf:resource="https://linkeddatahub.com:4443/admin/acl/agents/ce84eb31-cc1e-41f4-9e29-dacd417b9818#this"/>
+    <j.4:inDataset rdf:resource="https://linkeddatahub.com:4443/docs/graphs/d83fb097-94de-4242-8255-9cf067b62f16#this"/>
+    <rdf:type rdf:resource="https://linkeddatahub.com:4443/docs/ns/default#Item"/>
+    <j.11:slug>f1230897-0d30-4b12-a6df-cd88d9cc1cae</j.11:slug>
+    <j.6:has_space rdf:resource="https://linkeddatahub.com:4443/docs/"/>
+    <j.10:maker rdf:resource="https://linkeddatahub.com:4443/admin/acl/agents/ce84eb31-cc1e-41f4-9e29-dacd417b9818#this"/>
+    <j.6:content rdf:parseType="Literal"><div xmlns="http://www.w3.org/1999/xhtml">
+    <p class="lead">This guide walks through the main features of LinkedDataHub user interface.
+        See <a href="usage/">Getting started</a> guide for basic definitions such as application and document.</p>
+    <div class="alert alert-info">
+        <p>User interface is only one of the interfaces LinkedDataHub provides. The other one is the <a href="command-line-interface">
+            Command line interface</a>, which supports most of the UI actions.</p>
+    </div>
+    <div class="alert alert-info">
+        <p><em>Note that user interface features are subject to <a href="administration/acl">access control</a>. For example,
+            the search box will be visible if the user is not authorized to access the search container.</em></p>
+    </div>
+    <p>
+        <img alt="User interface" src="uploads/5aedc6ac31996b7332623edcd91dc3864c51df8c"></img>
+    </p>
+    <div>
+        <h2 id="nav-bar">Navigation bar</h2>
+        <p>
+            <img alt="Navigation bar" src="uploads/cd27577395dec18a2b3fb5867feeb60fe828cb43"></img>
+        </p>
+        <p>The application title or logo in the top-left always links to the root container of the current application.</p>
+        <p><dfn>Search box</dfn> lets users <a href="usage/#search" title="Search action">search for resources</a>
+        within the current application that have the specified keyword in their titles, descriptions etc. User can
+        navigate the search results just like any other container.</p>
+        <p>Application's <dfn>SPARQL endpoint</dfn> is accessible on the right. It offers a query editor and a result
+        view. Learn more about query possibilities in the <a href="usage/query-data">Query data</a> section.</p>
+        <p>Current application can be switched using a dropdown on the right. Different users have access to
+        different applications, depending on their authorizations.</p>
+        <p>Currently <a href="getting-started#log-in" title="Log in">logged-in user's</a> account is accessible via the icon on
+            the right, which opens a drop-down. You can log out by clicking the <span class="btn">Logout</span> button.</p>
+        <div class="alert alert-info">
+            <p><em>Due to current web browser limitations, it is not possible to logout using client certificate authentication.
+              As a workaround, you can close the browser, and click <span class="btn">Cancel</span> when asked to select a
+              certificate the next time.</em></p>
+        </div>
+    </div>
+    <div>
+        <h2 id="action-bar">Action bar</h2>
+        <p>
+            <img alt="Action bar" src="uploads/4656ea9036a2b6d48a3233e0bc3cdc0f698ae0f2"></img>
+        </p>
+        <p>The <span class="btn">Create</span> button invokes <a href="#create-edit">create dialog</a> through which
+        resources can be <a href="usage/#create">created</a> as instances of the
+        <a href="administration/model/#classes">classes</a> defined in the model.</p>
+        <p>The path leading from the current document up the parent/child hierarchy to the root container is shown in
+        the <dfn>breadcrumb bar</dfn>, where the current document is always the last breadcrumb. The user can always
+        open any of the ascendant containers by clicking breadcrumbs left from the current one. The icon shows the
+        type of the current document (container or item).</p>
+        <p>Further to the left, the action bar displays a number of buttons for toggling the available
+        <a href="#layout-modes">layout modes</a> as well as <a href="usage/#manage">performing actions</a> on the
+        current document.</p>
+        <p>Last but not least, the settings button provides a link to the <a href="administration/">administration</a>
+        application.</p>
+        <div class="alert alert-info">
+            <p><em>Only administration users have access to the administration application.</em></p>
+        </div>
+    </div>
+    <div>
+        <h2 id="layout-modes">Layout modes</h2>
+        <p>A list of possible <dfn>layout modes</dfn> is displayed, and can be switched using, the mode dropdown in
+        the action bar. Containers and items are available in different modes.</p>
+        <p>Container (page) layout modes:</p>
+        <dl>
+            <dt>Properties</dt>
+            <dd>The most detailed view showing every property/value of children resources.</dd>
+            <dt>List</dt>
+            <dd>List of children resources with titles and descriptions.</dd>
+            <dt>Table</dt>
+            <dd>Table with children resources as rows, properties as columns, and values as cells</dd>
+            <dt>Grid</dt>
+            <dd>A grid of children resources with titles, descriptions, and depiction thumbnails, if any.</dd>
+            <dt>Map</dt>
+            <dd>Shows all topic resources of the children of the current container that have coordinates</dd>
+            <dt>Graph</dt>
+            <dd>Displays the current document and related resources graphically as nodes in a network using
+            force-directed layout.</dd>
+        </dl>
+        <p>Item layout modes:</p>
+        <dl>
+            <dt>Properties</dt>
+            <dd>The most detailed view showing every property/value of the current document and its topic resource,
+            if any.</dd>
+            <dt>Map</dt>
+            <dd>Shows all topic resources of the children of the current container that have coordinates.</dd>
+            <dd>If the topic of current document is on the map, its description will be displayed in an info
+                window.</dd>
+            <dt>Graph</dt>
+            <dd>Displays the current document and related resources graphically as nodes in a network using
+            force-directed layout.</dd>
+        </dl>
+    </div>
+    <div>
+        <h2 id="pagination">Pagination</h2>
+        <p>Pagination is only available for container resources. <span class="btn">Prev</span>/<span class="btn">Next</span>
+        pager buttons, located above and below the <a href="#main-content">main content</a>, link to the page before
+        the current one and after the current one, respectively.</p>
+    </div>
+    <div>
+        <h2 id="main-content">Main content</h2>
+        <p>The main content section is located in the center of the screen. Its contents depend on the current document
+        and the current layout mode. Layout modes can be switched in the <a href="#action-bar">action bar</a>.</p>
+        <p>For containers, its children resources (normally a page of them) are shown. The default layout is
+        <a href="#layout-modes">list</a>.</p>
+        <p>For items, its XHTML content and properties/values of its topic resource (if any) are shown. The default
+        layout is <a href="#layout-modes">properties</a>.</p>
+    </div>
+    <div>
+        <h2 id="left-nav">Left navigation</h2>
+        <p>The left-side navigation provides access to the first-level children of the
+            <a href="usage/#hierarchy">root container</a>.</p>
+        <p>Depending on the type of the current container, a faceted search that filters its children using combinations
+        of subclass types can also be shown.</p>
+        <p>At the bottom of this section you will find quick access links to the following system containers:</p>
+        <dl>
+          <dt>Latest</dt>
+          <dd>A container with the latest resources in the application's dataset by creation/modification date</dd>
+          <dt>Files</dt>
+          <dd>A container for <a href="usage/#files">file uploads</a></dd>
+          <dt>Imports</dt>
+          <dd>A container for <a href="usage/import-data">data imports</a></dd>
+          <dt>Queries</dt>
+          <dd>A container for end-user SPARQL queries (including <a href="usage/import-data#vocabulary-conversion">vocabulary
+              mappings</a>)</dd>
+          <dt>Geo</dt>
+          <dd>A container with all resources in the application's dataset that have geographic coordinates</dd>
+          <dt>Charts</dt>
+          <dd>A container with charts that visualize SPARQL query results</dd>
+        </dl>
+    </div>
+    <div>
+        <h2 id="right-nav">Right navigation</h2>
+        <p>The right-side navigation shows details of the current document, such as creator and creation/modification
+        date. Additionally, it can show contextual links depending on the type of current document.</p>
+    </div>
+    <div>
+        <h2 id="create-edit">Create/Edit dialog</h2>
+        <p>
+            <img alt="Create/Edit dialog" src="uploads/fa4ec808c4dca4fe6b5a610d3e028ad48f8ed9af"></img>
+        </p>
+        <p>Resources are <a href="usage/#create">created</a> and <a href="usage/#update">updated</a> using
+        the same form-based dialog. The form can display either a document alone, or a document paired with its topic resource.
+        Each resource is displayed in a separate fieldset; fieldsets are nested for related resources.</p>
+        <p>Properties are listed inside fieldsets and their values shown as user inputs. When creating or updating a
+        resource which type class is defined in the <a href="administration/model/">model</a>, resource
+        properties are specified by the <a href="administration/model/#constructors">class constructor</a>.
+        Values of object properties are be displayed as typeahead input allowing users to type keywords and select
+        matching resources from a dropdown list. The list is filtered by resource type specified in the constructor.
+        Typeahead inputs also allow absolute URI values.</p>
+        <p>Mandatory properties are those for which there exists a <a href="administration/model/#constraints">constraint</a>
+        on a class that is being created or edited. Mandatory properties do not have a remove button. New property with a value
+        can be added using the property dropdown (at the bottom of fieldset).</p>
+        <p>If any of the resources are invalid (because of URI syntax errors or constraint violations) when attempting
+        to save the data, you will see error messages and indications which values are invalid. Resource creation or
+        update cannot be performed until these errors are fixed.</p>
+    </div>
+</div></j.6:content>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://linkeddatahub.com:4443/docs/?desc=true">
+    <rdf:value rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</rdf:value>
+    <j.9:predicate rdf:resource="https://www.w3.org/ns/ldt/document-hierarchy/domain#desc"/>
+    <j.1:paramName>desc</j.1:paramName>
+    <rdf:type rdf:resource="http://atomgraph.com/ns/platform/templates#Desc"/>
+    <j.11:desc rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</j.11:desc>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://linkeddatahub.com:4443/docs/sparql">
+    <rdf:type rdf:resource="https://www.w3.org/ns/ldt/core/domain#SPARQLEndpoint"/>
+    <j.6:has_space rdf:resource="https://linkeddatahub.com:4443/docs/"/>
+    <j.4:inDataset rdf:resource="https://linkeddatahub.com:4443/docs/graphs/8927554d-b931-40f9-8e79-757dbaf25f4f#this"/>
+    <j.5:title>SPARQL endpoint</j.5:title>
+    <j.5:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-02-17T18:51:00+01:00</j.5:created>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://linkeddatahub.com:4443/docs/command-line-interface">
+    <j.0:owner rdf:resource="https://linkeddatahub.com:4443/admin/acl/agents/ce84eb31-cc1e-41f4-9e29-dacd417b9818#this"/>
+    <j.5:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2018-08-19T08:58:16.003+02:00</j.5:created>
+    <j.5:description>Learn to use CLI to execute most of the common tasks that can be performed in the UI</j.5:description>
+    <j.10:maker rdf:resource="https://linkeddatahub.com:4443/admin/acl/agents/ce84eb31-cc1e-41f4-9e29-dacd417b9818#this"/>
+    <j.4:inDataset rdf:resource="https://linkeddatahub.com:4443/docs/graphs/7de0f74b-67f6-4424-819e-3a6ec4f03b64#this"/>
+    <j.5:title>Command line interface</j.5:title>
+    <rdf:type rdf:resource="https://linkeddatahub.com:4443/docs/ns/default#Item"/>
+    <j.11:slug>553644ad-bfd4-45bb-873e-ee6142cc1798</j.11:slug>
+    <j.6:content rdf:parseType="Literal"><div xmlns="http://www.w3.org/1999/xhtml">
+    <p class="lead">Learn to use CLI to execute most of the common tasks that can be performed in the UI</p>
+    <p>LinkedDataHub CLI wraps the <a href="http-api">HTTP API</a> into a set of shell scripts with convenient parameters. The scripts can be used for testing, automation,
+        scheduled execution and such. It is usually much quicker to perform actions using CLI rather than the <a href="user-interface">user interface</a>, as well as easier to
+        reproduce.</p>
+    <p>Some scripts correspond to a single <a href="#atomic">atomic</a> request to LinkedDataHub. Others combine others into <a href="#tasks">tasks</a> with multiple
+        interdependent requests.</p>
+    <p>If you use <a href="https://dydra.com">Dydra</a> as the triplestore, you may use the Dydra-specific scripts (they accept a repository URI instead of SPARQL endpoint and graph store URIs). Otherwise, use the generic scripts.</p>
+    <p><dfn>Installation</dfn> here is meant here in terms of installing (importing) the respective <a href="dataset-structure">default dataset(s)</a> into both end-user and admin
+        application services. If you do not wish to install the end-user dataset as part of the task, you need to install the admin dataset separately.</p>
+    <div>
+        <h2 id="atomic">Atomic</h2>
+        <p>Atomic commands are focused on performing a single request, such as creating a document or an application. Currently supported:</p>
+        <ul>
+            <li>Create document</li>
+            <li>Create container</li>
+            <li>Apps
+                <ul>
+                    <li>Create context</li>
+                    <li>Create end-user</li>
+                    <li>Create admin</li>
+                    <li>Create service</li>
+                    <li>Install dataset</li>
+                    <li>Dydra-specific
+                        <ul>
+                            <li>Create service</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>Imports
+                <ul>
+                    <li>Create file</li>
+                    <li>Create query</li>
+                    <li>Create CSV import</li>
+                </ul>
+            </li>
+        </ul>
+        <p>Usage example:</p>
+        <pre>./create-file https://linkeddatahub.com/my-context/my-dataspace/ linkeddatahub.pem Password "Friends" 44f18281-6afa-408e-a7c4-bad38487f198 646af756-a49f-40da-a25e-ea8d81f6d306 friends.csv text/csv</pre>
+    </div>
+    <div>
+        <h2 id="tasks">Tasks</h2>
+        <ul>
+            <li>Apps
+                <ul>
+                    <li>Create context</li>
+                    <li>Create dataspace</li>
+                    <li>Install context</li>
+                    <li>Install dataspace</li>
+                    <li>Dydra-specific
+                        <ul>
+                            <li>Create context</li>
+                            <li>Create dataspace</li>
+                            <li>Install context</li>
+                            <li>Install dataspace</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>Imports
+                <ul>
+                    <li>Import CSV data</li>
+                </ul>
+            </li>
+        </ul>
+        <p>Usage example:</p>
+        <pre>./create-dataspace.sh https://linkeddatahub.com/my-context/ linkeddatahub.pem Password "My dataspace" my-dataspace https://linkeddatahub.com/my-context/my-dataspace/ http://localhost:3030/admin/sparql http://localhost:3030/admin/data AdminServiceUser AdminServicePassword http://localhost:3030/end-user/sparql http://localhost:3030/end-user/data EndUserServiceUser EndUserServicePassword</pre>
+    </div>
+    <p class="lead">Find the <a href="https://github.com/AtomGraph/LinkedDataHub">CLI scripts on GitHub</a>.</p>
+</div></j.6:content>
+    <j.6:has_container rdf:resource="https://linkeddatahub.com:4443/docs/"/>
+    <j.6:has_space rdf:resource="https://linkeddatahub.com:4443/docs/"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://linkeddatahub.com:4443/docs/tutorials/">
+    <rdf:type rdf:resource="https://linkeddatahub.com:4443/docs/ns/default#Container"/>
+    <j.4:inDataset rdf:resource="https://linkeddatahub.com:4443/docs/graphs/d8a1a867-0948-4bb0-8591-fe07e27ab837#this"/>
+    <j.5:description>Step by step tutorials for the most common tasks</j.5:description>
+    <j.6:has_space rdf:resource="https://linkeddatahub.com:4443/docs/"/>
+    <j.11:slug>4568ecfa-9ac7-4e98-97bc-5bd7f92e396e</j.11:slug>
+    <j.5:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2018-08-19T08:57:41.977+02:00</j.5:created>
+    <j.10:maker rdf:resource="https://linkeddatahub.com:4443/admin/acl/agents/ce84eb31-cc1e-41f4-9e29-dacd417b9818#this"/>
+    <j.5:title>Tutorials</j.5:title>
+    <j.6:has_parent rdf:resource="https://linkeddatahub.com:4443/docs/"/>
+    <j.0:owner rdf:resource="https://linkeddatahub.com:4443/admin/acl/agents/ce84eb31-cc1e-41f4-9e29-dacd417b9818#this"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://linkeddatahub.com:4443/docs/?limit=20">
+    <rdf:value rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">20</rdf:value>
+    <j.9:predicate rdf:resource="https://www.w3.org/ns/ldt/document-hierarchy/domain#limit"/>
+    <j.1:paramName>limit</j.1:paramName>
+    <rdf:type rdf:resource="http://atomgraph.com/ns/platform/templates#Limit20"/>
+    <j.11:limit rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">20</j.11:limit>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://linkeddatahub.com:4443/docs/getting-started">
+    <j.0:owner rdf:resource="https://linkeddatahub.com:4443/admin/acl/agents/ce84eb31-cc1e-41f4-9e29-dacd417b9818#this"/>
+    <j.5:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2018-08-19T08:58:24.384+02:00</j.5:created>
+    <j.6:has_space rdf:resource="https://linkeddatahub.com:4443/docs/"/>
+    <rdf:type rdf:resource="https://linkeddatahub.com:4443/docs/ns/default#Item"/>
+    <j.6:has_container rdf:resource="https://linkeddatahub.com:4443/docs/"/>
+    <j.5:description>How to get access</j.5:description>
+    <j.5:title>Getting started</j.5:title>
+    <j.10:maker rdf:resource="https://linkeddatahub.com:4443/admin/acl/agents/ce84eb31-cc1e-41f4-9e29-dacd417b9818#this"/>
+    <j.4:inDataset rdf:resource="https://linkeddatahub.com:4443/docs/graphs/eea8b036-e739-4d70-a9a2-90dbc3a7fd86#this"/>
+    <j.6:content rdf:parseType="Literal"><div xmlns="http://www.w3.org/1999/xhtml">
+    <p class="lead">This guide describes how to get access to an application.</p>
+    <div>
+        <h2 id="requirements">Requirements</h2>
+        <p>Any recent web browser with JavaScript support will do.</p>
+    </div>
+    <div>
+        <h2 id="sign-up">Sign up</h2>
+        <p>LinkedDataHub uses WebID as the <a href="https://en.wikipedia.org/wiki/Single_sign-on">Single sign-on</a> (SSO)
+            protocol for distributed applications, which is based on authentication using TLS client certficates.
+            <a href="http://webid.info">Read more about WebID</a>.</p>
+        <p>Using WebID, you will be able to authenticate with every LinkedDataHub application. If you already have a WebID,
+            you can use it for this purpose and skip the rest of this section. If you do not have a WebID, LinkedDataHub
+            will create one for you when you sign up.</p>
+        <div class="alert alert-info">
+            <p>Unlike most LinkedDataHub resources, your WebID profile will have <em>public access</em> as required by the
+            protocol. We will hide your email address however.</p>
+        </div>
+        <p>To sign up, click on the <span class="btn">Sign up</span> on any of the LinkedDataHub applications. You will be
+            asked to fill basic details about yourself and your affiliation and provide a password for the certficate (at
+            least 6 characters long). After this is completed successfully, your WebID is created and stored in the
+            <a href="manage-apps#admin-apps">admin application</a>, and an email message is sent to the specified email
+            address with the certificate attached to it.</p>
+        <p>The final step is to install the certificate into your web browser. It is done by importing the <samp>.p12</samp>
+            file using the browser's certificate manager and providing the password that you supplied during signup. The
+            manager dialog can be opened following the steps below, depending on which browser you use (instructions are for
+            the latest versions as of October 2017):</p>
+        <dl>
+            <dt>Google Chrome</dt>
+            <dd><samp>Settings &gt; Advanced &gt; Manage Certificates &gt;  Import...</samp></dd>
+            <dt>Mozilla Firefox</dt>
+            <dd><samp>Options &gt; Privacy &amp; Security &gt; View Certificates... &gt; Import...</samp></dd>
+            <dt>Apple Safari</dt>
+            <dd>The file is installed directly into the operating system. Open the file and import it using the Keychain
+                Access tool.</dd>
+            <dt>Microsoft Edge</dt>
+            <dd>Does not support certificate management, you need to install the file into Windows.
+                <a href="https://social.technet.microsoft.com/Forums/en-US/18301fff-0467-4e41-8dee-4e44823ed5bf/microsoft-edge-browser-and-ssl-certificates?forum=win10itprogeneral">Read more here</a>.</dd>
+        </dl>
+        <p>You need to install the certificate on all devices/browsers that you are using to access LinkedDataHub.</p>
+    </div>
+    <div>
+        <h2 id="log-in">Log in</h2>
+        <p>With the certificate installed, there is no login procedure — you are automatically <em>authenticated</em> on all
+            LinkedDataHub applications. This is known as Single sign-on (SSO).</p>
+        <p>Applications can provide public access to some or all documents, meaning you can freely browse their public resources
+            and perform actions that are allowed for public access. In order to access protected (non-public) resources, as well
+            as to access administration application, users have to be authenticated as well <em>authorized</em> (authorizations
+            can be <a href="administration/acl#auth-requests">requested</a>.</p>
+        <div class="alert alert-info">
+            <p>Authenticated agents <em>are not guaranteed to have access</em> to all resources. Different access levels for
+                different agents can be specified by the application administrators.</p>
+        </div>
+        <p>We are working on <a href="https://oauth.net/2/">OAuth 2.0</a> authentication with 3rd party providers such as Google,
+            Twitter, and GitHub.</p>
+    </div>
+    <p class="lead">Are you in? Then take a look at <a href="usage/">usage</a>.</p>
+</div></j.6:content>
+    <j.11:slug>60475b7c-956d-42c0-b0e8-6298b8401be9</j.11:slug>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://linkeddatahub.com:4443/docs/http-api">
+    <rdf:type rdf:resource="https://linkeddatahub.com:4443/docs/ns/default#Item"/>
+    <j.0:owner rdf:resource="https://linkeddatahub.com:4443/admin/acl/agents/ce84eb31-cc1e-41f4-9e29-dacd417b9818#this"/>
+    <j.5:description>Learn how to access and manage RDF data over generic HTTP API</j.5:description>
+    <rdfs:seeAlso rdf:resource="https://www.w3.org/TR/sparql11-http-rdf-update/"/>
+    <rdfs:seeAlso rdf:resource="https://atomgraph.github.io/Linked-Data-Templates/"/>
+    <j.4:inDataset rdf:resource="https://linkeddatahub.com:4443/docs/graphs/2d3f54a8-c55d-492e-aa83-51cd6b403e21#this"/>
+    <j.10:maker rdf:resource="https://linkeddatahub.com:4443/admin/acl/agents/ce84eb31-cc1e-41f4-9e29-dacd417b9818#this"/>
+    <j.11:slug>488eee62-1d6b-4659-aed0-e022eb83b537</j.11:slug>
+    <j.6:content rdf:parseType="Literal"><div xmlns="http://www.w3.org/1999/xhtml">
+    <p class="lead">Learn how to read and write RDF data from/to LinkedDataHub applications over HTTP</p>
+    <p>LinkedDataHub implements a uniform, generic RESTful Linked Data API as defined by the
+        <a href="https://atomgraph.github.io/Linked-Data-Templates/#ldt-http">Linked Data Templates</a> specification in
+        combination with the SPARQL 1.1 <a href="https://www.w3.org/TR/sparql11-http-rdf-update/">Graph Store Protocol</a>.</p>
+    <div>
+        <h2 id="acl">Access control</h2>
+        <p>All HTTP access to <a href="#documents">documents</a> and <a href="#graphs">graphs</a> is subject to <a href="administration/acl">access
+            control</a>. Requesting a resource with insufficient access rights will result in <code>403 Forbidden</code> response. That  means either:</p>
+        <ul>
+            <li>the user is not authenticated and public (unauthenticated) access to the resource is not allowed</li>
+            <li>the user is authenticated but the associated agent does not have an authorization to <a href="usage/#manage">perform the action</a> on the
+                requested resource</li>
+        </ul>
+    </div>
+    <div>
+        <h2 id="documents">Managing documents</h2>
+        <div class="alert alert-info">
+            <p>Due to the <a href="dataset-structure">dataset structure</a>, resource descriptions cannot be updated directly.
+                Instead, <a href="#graphs">graphs</a> in which they are stored need to be updated.</p>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Method</th>
+                    <th>Description</th>
+                    <th>Success</th>
+                    <th>Failure</th>
+                    <th>Reason</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="3"><code id="ld-get">GET</code></td>
+                    <td rowspan="3">Returns description of requested resource</td>
+                    <td rowspan="3"><code>200 OK</code></td>
+                    <td><code>400 Bad Request</code></td>
+                    <td><a href="administration/sitemap/#parameters">Parameter</a> not supported or its value is invalid</td>
+                </tr>
+                <tr>
+                    <td><code>404 Not Found</code></td>
+                    <td>Resource with request URI not found</td>
+                </tr>
+                <tr>
+                    <td><code>406 Not Acceptable</code></td>
+                    <td><a href="#con-neg">Media type</a> not supported</td>
+                </tr>
+                <tr>
+                    <td rowspan="5"><code id="ld-post">POST</code></td>
+                    <td rowspan="5">Creates new resource</td>
+                    <td rowspan="5"><code>201 Created</code></td>
+                    <td><code>400 Bad Request</code></td>
+                    <td><a href="#con-neg">RDF syntax error</a></td>
+                </tr>
+                <tr>
+                    <td><code>400 Bad Request</code></td>
+                    <td><a href="administration/model/#constraints">Constraint</a> violation</td>
+                </tr>
+                <tr>
+                    <td><code>404 Not Found</code></td>
+                    <td>Resource with request URI not found</td>
+                </tr>
+                <tr>
+                    <td><code>409 Conflict</code></td>
+                    <td>Resource already exists</td>
+                </tr>
+                <tr>
+                    <td><code>415 Unsupported Media Type</code></td>
+                    <td><a href="#con-neg">Media type</a> not supported</td>
+                </tr>
+                <tr>
+                    <td><code id="ld-put">PUT</code></td>
+                    <td>Method not allowed. See <a href="#graphs">graph</a> <code>PUT</code></td>
+                    <td></td>
+                    <td><code>405 Not Allowed</code></td>
+                    <td>Method not allowed</td>
+                </tr>
+                <tr>
+                    <td><code id="ld-delete">DELETE</code></td>
+                    <td>Removed the description of the requested resource</td>
+                    <td><code>204 No Content</code></td>
+                    <td><code>404 Not Found</code></td>
+                    <td>Resource with request URI not found</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <h2 id="graphs">Managing graphs</h2>
+        <p>As explained in <a href="dataset-structure">dataset structure</a>, each document is stored in its own graph. You can navigate from the
+            document to the graph using the <code>void:inDataset</code> property.</p>
+        <p>Graphs are managed using the SPARQL 1.1 <a href="https://www.w3.org/TR/sparql11-http-rdf-update/">Graph Store HTTP Protocol</a>.</p>
+    </div>
+    <div>
+        <h2 id="sparql">Executing SPARQL</h2>
+        <p>Every LinkedDataHub application provides a SPARQL endpoint on <code>sparql</code> path (relative to the application's base URI). It supports
+            <a href="https://www.w3.org/TR/sparql11-protocol/">SPARQL 1.1 Protocol</a> and serves as a proxy for the service endpoint of the
+            application.</p>
+    </div>
+    <div>
+        <h2 id="con-neg">Content negotiation</h2>
+        <p>LinkedDataHub implements <a href="https://tools.ietf.org/html/rfc7231#section-3.4.1">proactive conneg</a> based on the request <code>Accept</code>
+            header value.  The following RDF media types are supported (for requests as well as responses, unless indicated otherwise):</p>
+        <ul>
+            <li><a href="https://www.w3.org/TR/turtle/">Turtle</a> <code>text/turtle</code></li>
+            <li><a href="https://www.w3.org/TR/n-triples/">N-Triples</a> <code>application/n-triples</code></li>
+            <li><a href="https://www.w3.org/TR/rdf-syntax-grammar/">RDF/XML</a> <code>application/rdf+xml</code></li>
+            <li><a href="https://www.w3.org/TR/json-ld/">JSON-LD</a> <code>application/ld+json</code></li>
+            <li><a href="http://www.lsrn.org/semweb/rdfpost.html">RDF/POST</a> <code>application/x-www-form-urlencoded</code> (for requests only)</li>
+        </ul>
+    </div>
+    <div>
+        <h2 id="hypermedia">Hypermedia</h2>
+        <p>In every RDF response that is not a redirect, <code>201 Created</code>, <code>404 Not Found</code> you can expect to find an RDF resource
+            with request URI which has argument properties generated from LDT <a href="administration/sitemap/#parameters">parameters</a>.
+            For example:</p>
+        <pre><code>@prefix rdf:  &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
+@prefix ldt:  &lt;https://www.w3.org/ns/ldt#&gt; .
+@prefix ldth: &lt;https://www.w3.org/ns/ldt/document-hierarchy/domain#&gt; .
+@prefix apl:  &lt;http://atomgraph.com/ns/platform/domain#&gt; .
+@prefix spl:  &lt;http://spinrdf.org/spl#&gt; .
+
+&lt;https://linkeddatahub.com/people/?limit=20&amp;desc=true&gt;
+    ldt:arg [ a apl:Limit ;
+        rdf:value 20 ;
+        spl:predicate ldth:limit ;
+        ldt:paramName "limit"
+    ] ;
+    ldt:arg [ a apl:Desc ;
+        rdf:value true ;
+        spl:predicate ldth:desc ;
+        ldt:paramName "desc"
+    ] .
+</code></pre>
+    </div>
+    <div>
+        <h2 id="errors">Error responses</h2>
+        <p>LinkedDataHub provides machine-readable error responses in the requested RDF format. An example of <code>403 Forbidden</code>:</p>
+        <pre><code>@prefix xsd:  &lt;http://www.w3.org/2001/XMLSchema#&gt; .
+@prefix http: &lt;http://www.w3.org/2011/http#&gt; .
+@prefix sc:   &lt;http://www.w3.org/2011/http-statusCodes#&gt; .
+@prefix dct:  &lt;http://purl.org/dc/terms/&gt; .
+
+[ a http:Response ;
+    dct:title "Access not authorized" ;
+    http:reasonPhrase "Forbidden" ;
+    http:sc sc:Forbidden ;
+    http:statusCodeValue "403"^^xsd:long
+] .</code></pre>
+    </div>
+    <div>
+        <h2 id="caching">Caching</h2>
+        <p>Response <code>Cache-Control</code> headers can be controlled using LDT <a href="administration/sitemap/#templates">template
+            properties</a>. Responses that are subject to caching, i.e. do not use <code>Authorization</code> header and have a correct
+            <code>Cache-Control</code> value (for example: <code>public, no-transform, max-age=3600</code>) will be cached automatically by
+            LinkedDataHub using <a href="https://varnish-cache.org">Varnish</a> as HTTP proxy cache. You can check the age of the response by inspecting
+            the <code>Age</code> response header (the value is in seconds).</p>
+    </div>
+</div></j.6:content>
+    <j.6:has_container rdf:resource="https://linkeddatahub.com:4443/docs/"/>
+    <j.5:title>HTTP API</j.5:title>
+    <j.5:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2018-08-19T08:58:28.527+02:00</j.5:created>
+    <j.6:has_space rdf:resource="https://linkeddatahub.com:4443/docs/"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://linkeddatahub.com:4443/docs/administration/">
+    <j.5:description>Guides for managing access control, model, and sitemap</j.5:description>
+    <j.4:inDataset rdf:resource="https://linkeddatahub.com:4443/docs/graphs/109f5c26-29c0-4c16-a2f9-6e3e85fa74d8#this"/>
+    <j.10:maker rdf:resource="https://linkeddatahub.com:4443/admin/acl/agents/ce84eb31-cc1e-41f4-9e29-dacd417b9818#this"/>
+    <j.0:owner rdf:resource="https://linkeddatahub.com:4443/admin/acl/agents/ce84eb31-cc1e-41f4-9e29-dacd417b9818#this"/>
+    <j.5:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2018-08-19T08:57:10.378+02:00</j.5:created>
+    <j.5:title>Administration</j.5:title>
+    <j.6:has_parent rdf:resource="https://linkeddatahub.com:4443/docs/"/>
+    <j.6:has_space rdf:resource="https://linkeddatahub.com:4443/docs/"/>
+    <j.11:slug>0a6964eb-4485-4c1b-b3df-fc97e7bc0757</j.11:slug>
+    <rdf:type rdf:resource="https://linkeddatahub.com:4443/docs/ns/default#Container"/>
+    <j.6:content rdf:parseType="Literal"><div xmlns="http://www.w3.org/1999/xhtml">
+    <p class="lead">Learn to manage the structure and access control of your application</p>
+    <p>Administration is provided in a separate LDT application, which is paired with each <a href="../manage-apps#end-user-apps">end-user
+        application</a>.</p>
+</div></j.6:content>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://linkeddatahub.com:4443/docs/?limit=20&amp;desc=true&amp;orderBy=created">
+    <j.7:next rdf:resource="https://linkeddatahub.com:4443/docs/?offset=20&amp;limit=20&amp;orderBy=created&amp;desc=true"/>
+    <rdf:type rdf:resource="https://www.w3.org/ns/ldt/document-hierarchy/domain#Page"/>
+    <j.11:pageOf rdf:resource="https://linkeddatahub.com:4443/docs/"/>
+    <rdf:type rdf:resource="https://www.w3.org/ns/ldt/core/domain#View"/>
+    <j.3:viewOf rdf:resource="https://linkeddatahub.com:4443/docs/"/>
+    <j.3:stateOf rdf:resource="https://linkeddatahub.com:4443/docs/"/>
+    <j.1:arg rdf:resource="https://linkeddatahub.com:4443/docs/?limit=20"/>
+    <j.1:arg rdf:resource="https://linkeddatahub.com:4443/docs/?desc=true"/>
+    <j.1:arg rdf:resource="https://linkeddatahub.com:4443/docs/?orderBy=created"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://linkeddatahub.com:4443/docs/?orderBy=created">
+    <rdf:value>created</rdf:value>
+    <j.9:predicate rdf:resource="https://www.w3.org/ns/ldt/document-hierarchy/domain#orderBy"/>
+    <j.1:paramName>orderBy</j.1:paramName>
+    <rdf:type rdf:resource="http://atomgraph.com/ns/platform/templates#OrderByCreated"/>
+    <j.11:orderBy>created</j.11:orderBy>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://linkeddatahub.com:4443/docs/about">
+    <j.4:inDataset rdf:resource="https://linkeddatahub.com:4443/docs/graphs/9d5fe121-b1e9-468d-a235-c0b67c6f7e46#this"/>
+    <j.5:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2018-08-19T08:58:11.806+02:00</j.5:created>
+    <j.0:owner rdf:resource="https://linkeddatahub.com:4443/admin/acl/agents/ce84eb31-cc1e-41f4-9e29-dacd417b9818#this"/>
+    <j.6:has_container rdf:resource="https://linkeddatahub.com:4443/docs/"/>
+    <j.6:has_space rdf:resource="https://linkeddatahub.com:4443/docs/"/>
+    <j.10:maker rdf:resource="https://linkeddatahub.com:4443/admin/acl/agents/ce84eb31-cc1e-41f4-9e29-dacd417b9818#this"/>
+    <rdf:type rdf:resource="https://linkeddatahub.com:4443/docs/ns/default#Item"/>
+    <j.11:slug>c3214f64-2259-4e52-b461-77ae7a1c23e9</j.11:slug>
+    <j.5:title>About LinkedDataHub</j.5:title>
+    <j.6:content rdf:parseType="Literal"><div xmlns="http://www.w3.org/1999/xhtml">
+    <p class="lead"><a href="https://linkeddatahub.com">LinkedDataHub</a> is next-generation software by
+        <a href="https://atomgraph.com">AtomGraph</a> that fully exploits semantic technologies to help organizations
+        overcome data silos and API hell</p>
+    <div>
+        <h2 id="why-linked-data">Why Linked Data?</h2>
+        <p>The web and data technologies have changed our world dramatically, but the solutions are still far
+        from perfect.</p>
+        <div>
+            <h3 id="problems">The problems</h3>
+            <p>The are multiple problems with the current technological landscape:</p>
+            <dl>
+                <dt>Data silos</dt>
+                <dd>The relational model, still used in most IT systems, is <em>inflexible</em> as the schema is
+                mandatory and <em>hard to change</em>. New kinds of NoSQL databases solve some of its problems but
+                increase the number of <em>incompatible</em> systems. As a result, there is no overview over company
+                information as the data is <em>scattered</em> across multiple data models and IT systems.</dd>
+                <dt>API hell</dt>
+                <dd>There are 10,000s of APIs and 100s of file formats. Application integration using APIs is
+                inherently point-to-point, and as such it does not scale as the number of connectors <em>grows
+                exponentially</em> with the growing number of APIs (in the worst case scenario). Additionally, most web
+                applications are not API-driven, therefore developing a frontend web app as well as an API requires
+                <em>double effort</em>.</dd>
+                <dt>Vendor lock-in</dt>
+                <dd>Most NoSQL databases <em>lack standards</em> such as query languages; domain models are baked into
+                source code and cannot be easily reused between systems; most APIs define custom vocabularies and file
+                formats. All of these factors create dependencies on vendor-specific solutions, which incur substantial
+                <em>switching costs</em> for customers.</dd>
+            </dl>
+        </div>
+        <div>
+            <h3 id="solutions">The solutions</h3>
+            <p>The solution is to use semantic technologies to build a uniform Linked Data layer above various physical
+            data sources.</p>
+            <dl>
+                <dt>RDF graph</dt>
+                <dd>RDF data model offers unprecedented <em>flexibility</em> by turning siloed data records into a global
+                network of interconnected resources. It makes schema optional and offers no-cost merge operation as well
+                as a standard query language (SPARQL). URIs are built-in global identifiers; when they are accessible online
+                and serve machine-readable resource descriptions, RDF becomes Linked Data.</dd>
+                <dt>Linked Data hub</dt>
+                <dd>Instead of point-to-point integration, our solution adopts the hub-and-spoke paradigm, where Linked
+                Data layer serves as the hub with shared identifiers and vocabularies, while the spokes are RDF connectors
+                to databases as well as transformers from data formats to RDF. Using this approach, integration costs stay
+                <em>linear</em> even with the growing number of data sources.</dd>
+                <dt>Uniform API</dt>
+                <dd><a href="http://atomgraph.github.io/Linked-Data-Templates/">Linked Data Templates</a> technology
+                enables read-write access to Linked Data based on a single <em>generic</em> API, which ensures API
+                interoperability and keeps implementation costs fixed. Frontend application development does not require a
+                separate effort, as it is simply a UI wrapper that renders the Linked Data API.</dd>
+            </dl>
+            <p>This simple yet powerful architecture is <em>non-disruptive</em> and future-proof: it builds on existing data
+            infrastructure and is based on W3C standards. It enables organizations to ask previously impossible questions,
+            get new insights, control data quality across multiple sources, improve SEO and rich search results etc. It also
+            keeps data integration costs linear over the long term.</p>
+        </div>
+    </div>
+    <div>
+        <h2 id="why-linked-data-hub">Why LinkedDataHub?</h2>
+        <p>LinkedDataHub is a cloud-based Linked Data application platform and Linked Data management system. After Linked Data
+          hub architecture is used to solve data integration, LinkedDataHub can be layered on top of it to provide a state of the
+          art Linked Data user experience as well as a uniform Linked Data API for machine readable access. It offers the
+          following features:</p>
+        <h3 id="application-platform">Application platform</h3>
+        <dl>
+          <dt>Cloud access</dt>
+          <dd>Applications live within the LinkedDataHub <em>multi-tenant</em> cloud environment; no infrastructure is required on the
+            customer's part. If required however, a platform instance can be installed on premises.</dd>
+          <dt>Single sign-on</dt>
+          <dd>LinkedDataHub uses <a href="http://webid.info">WebID</a>, a universal login and identity protocol for the Web, as the
+              default authentication method. User agents need to sign up only once to authenticate with any application on the
+              platform.</dd>
+          <dt>0% code</dt>
+          <dd>LinkedDataHub applications are not physical webapps as J2EE ones; they do not need to be implemented in source code
+            and then compiled/interpreted. Like everything within the platform, applications are Linked Data resources,
+            created and configured by managing RDF data. A new application can be set up in a <em>matter of minutes</em>.</dd>
+          <dt>100% configuration</dt>
+          <dd>The structure, appearance, and access rights of an application are completely controlled in the
+            <a href="administration/"> administration</a> domain by administration users.</dd>
+          <dt>Standard-compliance</dt>
+          <dd>Applications can use any <a href="https://www.w3.org/TR/sparql11-overview/">SPARQL 1.1</a> compatible
+            datasource. You can switch datasources at any time and and remain in complete <em>control of your data</em>.</dd>
+            <dd>However, LinkedDataHub also provides <a href="manage-apps#dydra-services">tighter integration</a> with select
+            triplestores, leading to optimized performance and easier configuration.</dd>
+        </dl>
+        <h3 id="data-management">Data management</h3>
+        <dl>
+          <dt>Data import</dt>
+          <dd>LinkedDataHub supports file uploads and import of CSV data, by mapping it to RDF using SPARQL
+            <code>CONSTRUCT</code> queries. Import of XML data is planned.</dd>
+          <dt>Data quality control</dt>
+          <dd>Consistency of the application's dataset is ensured by validating all incoming RDF data against SPARQL-based
+            <a href="administration/model/#constraints">SPIN constraints</a> (built-in as well as user-defined), which
+            are a part of the application's sitemap.</dd>
+          <dt>Access control</dt>
+          <dd>All access to every document on LinkedDataHub is checked against
+            <a href="administration/acl">access control</a> rules (built-in as well as user-defined). Unauthorized
+            access is denied.</dd>
+          <dt>Uniform UX</dt>
+          <dd>The <a href="user-interface">user experience</a> is consistent throughout the platform; all documents by
+            default support the same <a href="usage/#manage">actions</a>.</dd>
+          <dt>Extensibility</dt>
+          <dd>Administrative users can <a href="administration/sitemap/">use the sitemap</a> to extend an existing
+            application structure, and upload new XSLT and CSS stylesheets to customize the user interface.</dd>
+          <dt>Remote datasources</dt>
+          <dd>An integrated browser component allows exploring remote Linked Data resources without leaving the application.
+            We are constantly improving the software to take advantage of the distributed nature of Linked Data.</dd>
+          <dt>Linked Data API</dt>
+          <dd>Our next-generation Linked Data Templates technology provides read-write <a href="http-api">HTTP API</a> for
+            every document, customizable using <a href="administration/sitemap/#templates">declarative templates</a>.</dd>
+          <dt>SEO support</dt>
+          <dd>Customizable JSON-LD output allows a mapping of RDF resources to <a href="https://schema.org">schema.org</a>.
+            That structured data is <a href="https://developers.google.com/search/docs/guides/intro-structured-data">indexed
+            by Google</a> and other search engines and leads to improved rankings and rich search results.</dd>
+        </dl>
+        <p class="lead"><a href="mailto:sales@atomgraph.com">Contact us</a> for a trial of LinkedDataHub.</p>
+    </div>
+</div></j.6:content>
+    <j.5:description>A UI-based cloud platform for data integration, management, and application building</j.5:description>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://linkeddatahub.com:4443/docs/">
+    <rdf:type rdf:resource="https://linkeddatahub.com:4443/docs/ns/default#Container"/>
+    <rdfs:seeAlso rdf:resource="https://linkeddatahub.com:4443/docs/sparql"/>
+    <j.6:has_space rdf:resource="https://linkeddatahub.com:4443/docs/"/>
+    <j.4:inDataset rdf:resource="https://linkeddatahub.com:4443/docs/graphs/173eedbd-3d3b-45c9-b021-17d4e1e03009#this"/>
+    <j.5:title>Root</j.5:title>
+    <j.5:description>Root container</j.5:description>
+    <j.5:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2016-02-17T18:51:00+01:00</j.5:created>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://linkeddatahub.com:4443/docs/manage-apps">
+    <rdf:type rdf:resource="https://linkeddatahub.com:4443/docs/ns/default#Item"/>
+    <j.10:maker rdf:resource="https://linkeddatahub.com:4443/admin/acl/agents/ce84eb31-cc1e-41f4-9e29-dacd417b9818#this"/>
+    <j.4:inDataset rdf:resource="https://linkeddatahub.com:4443/docs/graphs/27add23d-1e71-4ffe-8266-4ba3d6119772#this"/>
+    <j.0:owner rdf:resource="https://linkeddatahub.com:4443/admin/acl/agents/ce84eb31-cc1e-41f4-9e29-dacd417b9818#this"/>
+    <j.5:title>Manage applications</j.5:title>
+    <j.11:slug>ce963bb7-ca61-4a9d-87be-a6bfa3ab244c</j.11:slug>
+    <j.6:content rdf:parseType="Literal"><div xmlns="http://www.w3.org/1999/xhtml">
+    <div>
+        <h2 id="dataspaces">Dataspaces</h2>
+        <p>The LinkedDataHub URI address space is split into <dfn>dataspaces</dfn>. Every dataspace consists of a pair of LDT applications:
+            <a href="#end-user-apps">end-user</a> and <a href="#admin-apps">administration</a>.</p>
+    </div>
+    <div>
+        <h2 id="applications">Applications</h2>
+        <p class="text-center">
+            <img alt="Dataspace hierarchy" src="uploads/3cbf6ccd5f92b84111e2425263da050db0e4663f"></img>
+        </p>
+        <p>All LDT applications have the following properties:</p>
+        <dl>
+            <dt>Base URI</dt>
+            <dd>Base URI is a URI by which an application can be identified. An application might have multiple base URIs; all request URIs
+                processed by an application are relative to one of its base URIs. For example, the base URI of this Documentation dataspace is
+                <code>https://linkeddatahub.com/docs/</code>.</dd>
+            <dd>URIs in the <a href="dataset-structure">application dataset</a> are usually (but not necessarily) relative to one or more of
+                the base URIs.</dd>
+            <dt>Service</dt>
+            <dd><a href="#services">SPARQL service</a></dd>
+            <dt>Ontology</dt>
+            <dd>Ontology defines the terms (classes, properties etc.) of the application domain as well as its LDT templates. It can import
+                other ontologies from within the application as well as from external applications.</dd>
+            <dd>Ontologies as <a href="administration/sitemap/">managed in the administration</a> application.</dd>
+        </dl>
+        <div class="alert alert-info">
+            <p>Base URI must end with a forward slash (<code>/</code>).</p>
+        </div>
+        <div>
+            <h3 id="contexts">Contexts</h3>
+            <p>Contexts are special meta-applications that allow creation of dataspaces (that will belong to the context). The
+                concept can be compared to <a href="https://tomcat.apache.org/tomcat-8.0-doc/config/context.html">servlet context</a>
+                (to which multiple servlets can be added) in Java EE architecture.</p>
+            <p>LinkedDataHub provides administrators with a context, on which they can manage their own dataspaces (though not
+                create other contexts).</p>
+        </div>
+        <div>
+            <h3 id="end-user-apps">End-user</h3>
+            <p>The base URI of an end-user application is also the base URI of its dataspace.</p>
+            <p>Every end-user application is related to one <a href="#admin-app">administration application</a>.</p>
+        </div>
+        <div>
+            <h3 id="admin-apps">Administration</h3>
+            <p>Every administration application is related to one <a href="#end-user">end-user application</a>. It cannot exist standalone.</p>
+            <p>The base URI(s) of an administration application is the base URI(s) of its end-user application with <code>admin/</code> appended
+                to it. Note that any URIs in the end-user application that are equal or relative to the admin application base URI <em>will not
+                be accessible</em>.</p>
+            <p>Administration application provides means to control the <a href="administration/sitemap/">structure</a> and
+                <a href="administration/acl">access control</a> of its end-user application. Only dataspace owners have access to its
+                administration application.</p>
+        </div>
+        <p>LinkedDataHub provides an option to import the <a href="dataset-structure#linked-data-hub">default dataset</a> for each application type
+            into its service. The dataset URIs are rebased to be relative to the base URI of the application.</p>
+        <div class="alert alert-info">
+            <p>The agent which installs the adminstration application dataset becomes <a href="administration/acl#groups">the owner</a> of
+                its dataspace.</p>
+        </div>
+    </div>
+    <div>
+        <h2 id="services">Services</h2>
+        <p class="text-center">
+            <img alt="LDT architecture" src="https://atomgraph.github.io/Linked-Data-Templates/images/components.svg"></img>
+        </p>
+        <p>A service is a persistent SPARQL 1.1-compatible store from which the application's RDF dataset is accessible over HTTP. LinkedDataHub supports
+            generic services as well as triplestore-specific services which support easier configuration and optimized access. HTTP Basic is
+            suppported as an authentication scheme. Contact us regarding support for vendor-specific authentication such as API keys.</p>
+        <div class="alert alert-info">
+            <p>The end-user application service must be able to federate with the administration application service using the
+            SPARQL <code>SERVICE</code> keyword.</p>
+        </div>
+        <div>
+            <h3 id="generic-services">Generic services</h3>
+            <p>Generic service has the following properties:</p>
+            <dl>
+                <dt>Endpoint</dt>
+                <dd>SPARQL 1.1 Protocol endpoint URI</dd>
+                <dt>Graph Store</dt>
+                <dd>SPARQL 1.1 Graph Store Protocol endpoint URI</dd>
+                <dt>Username</dt>
+                <dd>HTTP Basic username (optional)</dd>
+                <dt>Password</dt>
+                <dd>HTTP Basic password (optional)</dd>
+            </dl>
+        </div>
+        <div>
+            <h3 id="dydra-services">Dydra services</h3>
+            <p>LinkedDataHub has built-in support for <a href="http://dydra.com">Dydra</a> services (repositories). It has the following properties:</p>
+            <dl>
+                <dt>Repository</dt>
+                <dd>Dydra repository URI</dd>
+                <dt>Username</dt>
+                <dd>HTTP Basic username (optional)</dd>
+                <dt>Password</dt>
+                <dd>HTTP Basic password (optional)</dd>
+            </dl>
+            <p class="lead"><a href="mailto:sales@atomgraph.com">Contact us</a> for a trial of Dydra.</p>
+        </div>
+    </div>
+    <p class="lead">If you are ready to create a dataspace, see our step-by-step tutorial on <a href="tutorials/create-dataspace">creating a dataspace</a>.</p>
+</div></j.6:content>
+    <j.6:has_container rdf:resource="https://linkeddatahub.com:4443/docs/"/>
+    <j.5:created rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2018-08-19T08:58:32.682+02:00</j.5:created>
+    <j.5:description>Learn how to create and manage LinkedDataHub applications</j.5:description>
+    <j.6:has_space rdf:resource="https://linkeddatahub.com:4443/docs/"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="https://linkeddatahub.com:4443/docs/?offset=20&amp;limit=20&amp;orderBy=created&amp;desc=true">
+    <j.7:prev rdf:resource="https://linkeddatahub.com:4443/docs/?limit=20&amp;desc=true&amp;orderBy=created"/>
+    <rdf:type rdf:resource="https://www.w3.org/ns/ldt/document-hierarchy/domain#Page"/>
+    <j.11:pageOf rdf:resource="https://linkeddatahub.com:4443/docs/"/>
+    <j.11:offset rdf:datatype="http://www.w3.org/2001/XMLSchema#long">20</j.11:offset>
+  </rdf:Description>
+</rdf:RDF>
