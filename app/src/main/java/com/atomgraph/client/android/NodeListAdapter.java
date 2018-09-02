@@ -9,6 +9,8 @@ import android.widget.ListAdapter;
 
 import com.atomgraph.client.android.model.Container;
 
+import java.util.Collections;
+
 public class NodeListAdapter extends BaseAdapter implements ListAdapter
 {
 
@@ -19,6 +21,7 @@ public class NodeListAdapter extends BaseAdapter implements ListAdapter
     {
         this.container = container;
         this.context = context;
+        Collections.sort(container.getChildren()); // sort documents by title. TO-DO: make a copy of the list
     }
 
     public Container getContainer()

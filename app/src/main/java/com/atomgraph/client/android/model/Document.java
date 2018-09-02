@@ -1,5 +1,9 @@
 package com.atomgraph.client.android.model;
 
+import android.support.annotation.NonNull;
+
+import com.atomgraph.client.android.util.NamespaceResolver;
+
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
@@ -11,7 +15,7 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-public class Document
+public class Document implements Comparable<Document>
 {
 
     public static final String RDF_NS = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
@@ -24,6 +28,7 @@ public class Document
     {
         XPathFactory xPathfactory = XPathFactory.newInstance();
         XPath xpath = xPathfactory.newXPath();
+        xpath.setNamespaceContext(new NamespaceResolver(rdfXml)); // enable namespace-aware XPath
 
         try
         {
@@ -68,4 +73,11 @@ public class Document
         return null;
     }
 
+    @Override
+    public int compareTo(@NonNull Document o)
+    {
+        if (getTitle() != null && o.getTitle() != null) return getTitle().compareTo(o.getTitle());
+        if (getTitle() == null) return -1;
+        return 1;
+    }
 }

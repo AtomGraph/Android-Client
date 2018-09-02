@@ -6,6 +6,7 @@ import org.w3c.dom.NodeList;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Container extends Document

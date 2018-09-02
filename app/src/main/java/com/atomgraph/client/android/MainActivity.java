@@ -1,6 +1,8 @@
 package com.atomgraph.client.android;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -51,9 +53,10 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        Container current = new Container(URI.create("https://linkeddatahub.com/docs/"), doc);
+        Container current = new Container(URI.create("https://linkeddatahub.com:4443/docs/"), doc);
         ListAdapter adapter = new NodeListAdapter(current, getApplicationContext());
         listView.setAdapter(adapter);
+        //listView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
